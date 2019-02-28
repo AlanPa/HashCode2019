@@ -79,26 +79,26 @@ list<vector<int>> Photos::getSolution()
 	{
 		if(it->first)
 		{
-			for ( it2 = it->begin() ; it2 != it->end() ; ++it2)
+			for ( it2 = (it->second).begin() ; it2 != (it->second).end() ; ++it2)
 			{
 				vector<int> v;
-				v.insert(it->second);
+				v.push_back(it2->second);
 				it2++;
-				if(it2 != it->end())
+				if(it2 != (it->second).end())
 				{
 					res.push_back(v);
 					 break;
 				}
-				v.insert(it->second);
+				v.push_back(it2->second);
 				res.push_back(v);
 			}
 		}
 		else
 		{
-			for ( it2 = it->begin() ; it2 != it->end() ; ++it2)
+			for ( it2 = (it->second).begin() ; it2 != (it->second).end() ; ++it2)
 			{
 				vector<int> v;
-				v.insert(it->second);
+				v.push_back(it2->second);
 				res.push_back(v);
 				
 			}
