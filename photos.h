@@ -1,4 +1,3 @@
-#include <iostream>
 #include <string>
 #include <map>
 
@@ -14,4 +13,5 @@ class Photos
 		int nbPhotos;
 
 		void readFile(string filename);
+		void printPhotoSet();
 };

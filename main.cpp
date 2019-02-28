@@ -9,6 +9,7 @@ using namespace std;
 int main()
 {
 	Photos photoSet;
-	photoSet.readFile("input_files/a_example.txt");
+	photoSet.readFile("inputFiles/a_example.txt");
+	photoSet.printPhotoSet();
 	return 0;
 }
