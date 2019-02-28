@@ -1,5 +1,7 @@
 #include <string>
 #include <map>
+#include <list>
+#include <vector>
 
 using namespace std;
 
@@ -14,4 +16,5 @@ class Photos
 
 		void readFile(string filename);
 		void printPhotoSet();
+		list<vector<int>> getSolution();
 };

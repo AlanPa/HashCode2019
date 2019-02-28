@@ -11,5 +11,9 @@ int main()
 	Photos photoSet;
 	photoSet.readFile("inputFiles/a_example.txt");
 	photoSet.printPhotoSet();
+	list<vector<int>> r = photoSet.getSolution();
+	Slide s(r);
+	s.Result();
+
 	return 0;
 }

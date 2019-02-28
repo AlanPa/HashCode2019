@@ -65,7 +65,6 @@ void Photos::readFile(string filename)
 
 	    	}
 			lineCount++;
-
 	    }
 	}
 	else
@@ -91,4 +90,41 @@ void Photos::printPhotoSet()
 			cout << "tag = " << (*itTag).first <<  " ==> photo id = " << (*itTag).second << endl;
 		}
 	}
+}
+
+list<vector<int>> Photos::getSolution()
+{
+	list<vector<int>> res;
+	multimap<bool, multimap<string, int>>::iterator it;
+	multimap<string, int>::iterator it2;
+	for ( it = photoSet.begin() ; it != photoSet.end() ; ++it)
+	{
+		if(it->first)
+		{
+			for ( it2 = (it->second).begin() ; it2 != (it->second).end() ; ++it2)
+			{
+				vector<int> v;
+				v.push_back(it2->second);
+				it2++;
+				if(it2 != (it->second).end())
+				{
+					res.push_back(v);
+					 break;
+				}
+				v.push_back(it2->second);
+				res.push_back(v);
+			}
+		}
+		else
+		{
+			for ( it2 = (it->second).begin() ; it2 != (it->second).end() ; ++it2)
+			{
+				vector<int> v;
+				v.push_back(it2->second);
+				res.push_back(v);
+				
+			}
+		}
+	}
+	return res;
 }
