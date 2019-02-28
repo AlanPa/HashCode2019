@@ -62,3 +62,45 @@ void Photos::readFile(string filename)
 
 			    	}
 		}
+
+
+
+list<vector<int>> Photos::getSolution()
+{
+	list<vector<int>> res;
+	multimap<bool, multimap<string, int>>::iterator it;
+	multimap<string, int>::iterator it2;
+	for ( it = photoSet.begin() ; it != photoSet.end() ; ++it)
+	{
+		if(it->first)
+		{
+			for ( it2 = it->begin() ; it2 != it->end() ; ++it2)
+			{
+				vector<int> v;
+				v.insert(it->second);
+				it2++;
+				if(it2 != it->end())
+				{
+					res.push_back(v);
+					 break;
+				}
+				v.insert(it->second);
+				res.push_back(v);
+			}
+		}
+		else
+		{
+			for ( it2 = it->begin() ; it2 != it->end() ; ++it2)
+			{
+				vector<int> v;
+				v.insert(it->second);
+				res.push_back(v);
+				
+			}
+		}
+	}
+
+
+	return res;
+	
+}
