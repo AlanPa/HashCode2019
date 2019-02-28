@@ -1,15 +1,12 @@
 #include <iostream>
-
-//#include "Pizza.h" // TODO change
-
-void readFile(string filename)
-{
-	
-}
+#include <string>
 
 using namespace std;
+
+
+
 int main()
 {
-	//Pizza easyExample("input_files/d_big.in");
+	readFile("input_files/a_example.in");
 	return 0;
 }
