@@ -13,6 +13,5 @@ class Photos
 		// multimap<orientation, multimap<tag, photoNum>>
 		int nbPhotos;
 
-	public:
 		void readFile(string filename);
 };
