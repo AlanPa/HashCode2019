@@ -9,6 +9,9 @@ using namespace std;
 int main()
 {
 	Photos photoSet;
-	photoSet.readFile("input_files/a_example.txt");
+	photoSet.readFile("input_Files/a_example.txt");
+	list<vector<int>> r = photoSet.getSolution();
+	Slide s(r);
+	s.Result();
 	return 0;
 }
