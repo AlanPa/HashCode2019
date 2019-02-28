@@ -8,6 +8,7 @@ using namespace std;
 
 int main()
 {
-	readFile("input_files/a_example.in");
+	Photos photoSet;
+	photoSet.readFile("input_files/a_example.txt");
 	return 0;
 }

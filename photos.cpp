@@ -55,7 +55,7 @@ void Photos::readFile(string filename)
 			    		size_t lineLength = line.length();		    			
 		    			newSpacePosition = lineLength;
 
-			    		string lastTag = line.substr(spacePosition+1, lineLength - spacePositio);
+			    		string lastTag = line.substr(spacePosition+1, lineLength - spacePosition);
 		    			multimap<string, int> tempMap;
 		    			tempMap.insert(pair<string, int>(tag, lineCount-1));
 		    			photoSet.insert(pair<bool, multimap<string, int>>(vertical, tempMap));
