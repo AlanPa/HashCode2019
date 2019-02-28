@@ -5,12 +5,16 @@
 
 using namespace std;
 
+typedef multimap<string, int> InnerMap;
+typedef multimap<bool, InnerMap> Multimap;
+
 class Photos
 {
 	public:
 		Photos(){}
 		~Photos(){}
-		multimap<bool, multimap<string, int>> photoSet; 
+		
+		Multimap photoSet; 
 		// multimap<orientation, multimap<tag, photoNum>>
 		int nbPhotos;
 

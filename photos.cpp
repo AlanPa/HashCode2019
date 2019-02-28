@@ -32,37 +32,69 @@ void Photos::readFile(string filename)
 	    		{
 	    			vertical = true;
 	    		}
-	    		string::size_type newSpacePosition = line.find(' ', spacePosition);
+	    		string::size_type newSpacePosition = line.find(' ', spacePosition+1);
 	    		string nbTag = line.substr(spacePosition+1, newSpacePosition + 1 - spacePosition);
 	    		int nbTags = stoi(nbTag);
 
 	    		spacePosition = newSpacePosition;
-	    		newSpacePosition = line.find(' ', spacePosition);
-
+	    		cout << "1er espace a la position : " << spacePosition << endl;
+	    		newSpacePosition = line.find(' ', spacePosition+1);
+	    		cout << "2e espace a la position : " << newSpacePosition << endl;
+				
+				Multimap::iterator itOrient;
 	    		for(int i=0; i<nbTags-2 ; i++)
 	    		{
-	    			string tag = line.substr(spacePosition+1, newSpacePosition + 1 - spacePosition);
-	    			multimap<string, int> tempMap;
-	    			tempMap.insert(make_pair(tag, lineCount-1));
-	    			photoSet.insert(make_pair(vertical, tempMap));
-
-	    			spacePosition = newSpacePosition;
+	    			string tag = line.substr(spacePosition+1, newSpacePosition - 1 - spacePosition);
+	    			cout << i << "eme tag de la photo " << lineCount-1 << " est " << tag << endl;
+	    			for(itOrient = photoSet.begin() ; itOrient != photoSet.end() ; ++itOrient)
+					{
+						if((*itOrient).second.find(tag)!= (*itOrient).second.end()) // tag found
+		    			{
+		    				cout << "new pair!" << endl;
+		    				InnerMap tempMap;
+			    			tempMap.insert(make_pair(tag, lineCount-1));
+			    			photoSet.insert(make_pair(vertical, tempMap));
+			    			break;
+		    			}
+						
+					}
+	    			spacePosition = newSpacePosition+1;
 	    			newSpacePosition = line.find(' ', spacePosition);
+	    			cout << i+3 << "e espace a la position : " << newSpacePosition << endl;
 	    		}
-	    		string tag = line.substr(spacePosition+1, newSpacePosition + 1 - spacePosition);
-	    		multimap<string, int> tempMap;
-    			tempMap.insert(make_pair(tag, lineCount-1));
-    			photoSet.insert(make_pair(vertical, tempMap));
+	    		string tag = line.substr(spacePosition, newSpacePosition - spacePosition);
+	    		cout << nbTags-2 << "eme tag de la photo " << lineCount-1 << " est " << tag << endl;
+
+				for(itOrient = photoSet.begin() ; itOrient != photoSet.end() ; ++itOrient)
+				{
+					if((*itOrient).second.find(tag)!= (*itOrient).second.end()) // tag found
+	    			{
+	    				cout << "new pair!" << endl;
+	    				multimap<string, int> tempMap;
+		    			tempMap.insert(make_pair(tag, lineCount-1));
+		    			photoSet.insert(make_pair(vertical, tempMap));
+		    			break;
+	    			}
+				}	    		
     			
-    			spacePosition = newSpacePosition;
-	    		size_t lineLength = line.length();		    			
+    			spacePosition = newSpacePosition+1;
+	    		size_t lineLength = line.length();	    			
     			newSpacePosition = lineLength;
 
-	    		string lastTag = line.substr(spacePosition+1, lineLength - spacePosition);
-    			multimap<string, int> tempMap2;
-    			tempMap2.insert(make_pair(tag, lineCount-1));
-    			photoSet.insert(make_pair(vertical, tempMap));
-
+	    		string lastTag = line.substr(spacePosition, lineLength - spacePosition);
+	    		cout << nbTags-1 << "eme tag de la photo " << lineCount-1 << " est " << lastTag << endl;
+    			for(itOrient = photoSet.begin() ; itOrient != photoSet.end() ; ++itOrient)
+				{
+					if((*itOrient).second.find(tag)!= (*itOrient).second.end()) // tag found
+	    			{
+	    				cout << "new pair!" << endl;
+	    				multimap<string, int> tempMap;
+		    			tempMap.insert(make_pair(tag, lineCount-1));
+		    			photoSet.insert(make_pair(vertical, tempMap));
+		    			break;
+	    			}
+				}
+    			cout << endl;
 	    	}
 			lineCount++;
 	    }
@@ -83,12 +115,20 @@ void Photos::printPhotoSet()
 	multimap<bool,multimap<string, int>>::iterator itOrient;
 	for(itOrient = photoSet.begin() ; itOrient != photoSet.end() ; ++itOrient)
 	{
-		cout << (*itOrient).first << " photo with tag:" << endl;
+		cout << "There are " << photoSet.count((*itOrient).first) << " elements with key " << (*itOrient).first << endl;
+		cout << "[ " ;
 		multimap<string, int>::iterator itTag;
 		for (itTag = (*itOrient).second.begin() ; itTag != (*itOrient).second.end() ; ++itTag)
 		{
-			cout << "tag = " << (*itTag).first <<  " ==> photo id = " << (*itTag).second << endl;
+			cout << "There are " << (*itOrient).second.count((*itTag).first) << " elements with key " << (*itTag).first << ":";
+			multimap<string, int>::iterator it;
+			for (it=(*itOrient).second.equal_range((*itTag).first).first; it!=(*itOrient).second.equal_range((*itTag).first).second; ++it)
+	    	{
+	    		cout << ' ' << (*it).second;
+	    	}
+	    	cout << endl;
 		}
+		cout << "]" << endl;
 	}
 }
 
