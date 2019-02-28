@@ -1,6 +1,7 @@
 #include <iostream>
 
-#include "Pizza.h" // TODO change
+#include "slide.h"
+#include "photos.h"
 
 using namespace std;
 int main()
