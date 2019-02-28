@@ -1,6 +1,11 @@
 #include <iostream>
 
-#include "Pizza.h" // TODO change
+//#include "Pizza.h" // TODO change
+
+void readFile(string filename)
+{
+	
+}
 
 using namespace std;
 int main()
