@@ -1,11 +1,11 @@
 # Windows command : mingw32-make au lieu de make
 
 CC = g++
-CFLAGS = -Wall -Werror -std=c++11
+CFLAGS = -Wall -std=c++11
 LDFLAGS =
 
-DEPS = slide.h # TODO change
-OBJ = slide.o main.o # TODO change
+DEPS = slide.h photos.h
+OBJ = slide.o photos.o main.o
 
 default: slide.exe 
 
